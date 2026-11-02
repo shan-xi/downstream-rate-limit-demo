@@ -1,0 +1,32 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+downstream:
+  routes:
+    A:
+      rps: 5
+      queue-capacity: 100
+      workers: 2
+      latency-ms: 80
+    B:
+      rps: 20
+      queue-capacity: 200
+      workers: 4
+      latency-ms: 50
+    C:
+      rps: 2
+      queue-capacity: 50
+      workers: 1
+      latency-ms: 120
